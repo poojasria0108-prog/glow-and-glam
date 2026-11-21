@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./App.css";
 
@@ -36,7 +35,6 @@ function App() {
   const [category, setCategory] = useState("All");
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  // Authentication states
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState("");
   const [authSuccess, setAuthSuccess] = useState("");
@@ -74,18 +72,21 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://https://glow-and-glam-backend.onrender.com/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          confirmPassword
-        })
-      });
+      const response = await fetch(
+        "https://glow-and-glam-backend.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            confirmPassword
+          })
+        }
+      );
 
       const data = await response.json().catch(() => ({}));
 
@@ -124,16 +125,19 @@ function App() {
     const password = formData.get("password");
 
     try {
-     const response = await fetch("https://glow-and-glam-backend.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
-      });
+      const response = await fetch(
+        "https://glow-and-glam-backend.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })
+        }
+      );
 
       const data = await response.json().catch(() => ({}));
 
@@ -200,6 +204,7 @@ function App() {
   };
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity, 0
   );
